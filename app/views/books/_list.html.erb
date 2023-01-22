@@ -1,0 +1,21 @@
+<h2>User info</h2>
+
+<table class ="table">
+  <tbody>
+    <tr></tr>
+    <tr>
+      <th>name</th>
+      <th><%= user.name %></th>
+    </tr>
+    <tr>
+    <th>introduction</th>
+    <th><%= user.introduction %></th>
+    </tr>
+    <th></th>
+  </tbody>
+  </table>
+
+  <%= link_to edit_user_path(user.id),class:"btn btn-outline-secondary btn-block" do %>
+  <i class="fas fa-user-cog"></i>
+  <% end %>
+

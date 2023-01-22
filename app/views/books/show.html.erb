@@ -1,0 +1,36 @@
+flash[:notice] = "You have created book successfully."
+
+<%= render 'books/list',user: @user %>
+<div class = "raw">
+
+
+</div>
+
+<h2>Book detail</h2>
+  <div>
+    <%= link_to user_path(@book.user.id) do %>
+    <!--userの名前に飛ぶ-->
+      <%= image_tag @book.user.get_profile_image(100,100) %>
+      <%= @book.user.name %>
+    <% end %>
+   <span>
+    <%= link_to @book.title, book_path(@book.id) %>
+  </span>
+   <span><%= @book.body %></span>
+  </div>
+
+<%= link_to "Edit", edit_book_path(@book.id) %>
+<% if @book.user == current_user %>
+<%= link_to 'Destroy', book_path(@book.id), method: :delete %>
+  <% end %>
+
+  <%= form_with model: @book do |f| %>
+  <h2>New book</h2>
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+  <h4>Opinion</h4>
+  <%= f.text_area :body %>
+  <%= f.submit 'Create Book' %>
+<% end %>
+
+

@@ -1,0 +1,7 @@
+flash[:notice] = "投稿が成功しました"
+
+<%= render 'books/list',user: @user %>
+
+<%= link_to "edit", edit_user_path(@user.id) %>
+
+<%= render 'list2',book: @book  %>
