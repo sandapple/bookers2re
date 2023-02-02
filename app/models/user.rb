@@ -3,10 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
- devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
   has_many :books, dependent: :destroy
-validates :name, uniqueness:true, presence: true,length: { minimum: 2, maximum: 20 }
+validates :name, uniqueness:true, length: { minimum: 2, maximum: 20 }
 # nameの文字数は。２文字から20文字まで
 validates :introduction,length:{ maximum: 50 }
 has_one_attached :profile_image

@@ -1,30 +1,30 @@
-flash[:notice] = "Welcome! You have signed up successfully."
+<P><%=flash[:notice] = "Welcome! You have signed up successfully."%></p>
 <header>
   <span>Bookers</span>
-
 </header>
 
 <%= render 'books/list',user: @user %>
-<% @users.each do |user| %>
- <span>
-    <%= link_to "edit",edit_user_path(current_user.id) %>
-  </span>
-  <span>
-    <%= link_to "show",user_path(user.id) %>
-  </span>
-<% end %>
-
 <%= render 'list2',book: @book  %>
-<h2>Books</h2>
 
-<table class ="table">
-  <tbody>
-    <tr></tr>
+<div class="col-md-8 offset-md-1">
+<h2>Users</h2>
+<table class="table">
+  <thead>
     <tr>
-      <th>Title</th>
-      <th>Opinion</th>
-    <thcolspan="3"></th>
-    </tr>
-    <th></th>
+      <th>image</th>
+      <th>name</th>
+      <th colspan="3"></th>
+    <tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><p><%= image_tag user.get_profile_image(100,100) %></p></td>
+        <td><%= user.name %></td>
+        <td><%= link_to "Show",user_path(user.id) %></td>
+      </tr>
+    <% end %>
   </tbody>
-  </table>
+</table>
+</div>

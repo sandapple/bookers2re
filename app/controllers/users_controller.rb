@@ -1,20 +1,17 @@
 class UsersController < ApplicationController
+ before_action :correct_user, only: [:edit, :update ]
 
 
    def show
     @user = User.find(params[:id])
     @book = Book.new
-
+    @userbook = @user.books
    end
 
 # 以下を追加
   def create
-    # １.&2. データを受け取り新規登録するためのインスタンス作成
     users = User.new(user_params)
-    # 3. データをデータベースに保存するためのsaveメソッド実行
     users.save
-    # 4. トップ画面へリダイレクト
-    flash[:notice] = "投稿が成功しました"
     redirect_to '/top'
   end
 
@@ -26,18 +23,29 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+
   end
 
 def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_path(@user.id)
+   if @user.update(user_params)
+     flash[:notice] = "You have updated user successfully"
+     redirect_to user_path(current_user.id)
+   else
+     render:edit
+   end
 end
 
 
    private
   # ストロングパラメータ
   def user_params
-    params.require(:user).permit(:title, :body,:profile_image, :name)
+    params.require(:user).permit(:profile_image, :name, :introduction)
   end
+   def correct_user
+     @user = User.find(params[:id])
+     unless @user == current_user
+     redirect_to user_path(current_user)
+ end
+   end
 end
